@@ -10,7 +10,7 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1036px) {
     .container {
         flex-direction: column; /* Stack elements vertically */
     }

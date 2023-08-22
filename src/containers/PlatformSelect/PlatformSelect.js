@@ -51,11 +51,11 @@ const PlatformSelect = () => {
                       description={"Limited features without your keys leaving your computer"}/>
         </div>
         <div className={"card-option card"}>
-          <CardOption title={"Premium (Not Available)"} isDisabled={true} features={platformFeatures[1]} setSelect={setSelect}
+          <CardOption title={"Premium"} isDisabled={true} features={platformFeatures[1]} setSelect={setSelect}
                       description={"Fully featured platform suitable for most traders and algo traders"}/>
         </div>
         <div className={"card-option card"}>
-          <CardOption title={"Self Hosted (Not Available)"} isDisabled={true} features={platformFeatures[2]} setSelect={setSelect}
+          <CardOption title={"Self Hosted"} isDisabled={true} features={platformFeatures[2]} setSelect={setSelect}
                       description={"Host your own OnChain Terminal instance to store your data"}/>
         </div>
       </div>
