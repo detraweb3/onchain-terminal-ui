@@ -1,0 +1,32 @@
+.card-container {
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Distribute items with space between */
+    align-items: center; /* Center items vertically */
+    padding: 20px; /* Add some padding around the container */
+
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .box {
+        margin-bottom: 10px; /* Add spacing between stacked elements */
+    }
+}
+
+.card {
+    flex: 1; /* Allow the boxes to grow equally */
+    padding: 10px; /* Add padding to the boxes */
+    text-align: center;
+    height: 100%;
+    margin: 20px;
+    margin-bottom: auto;
+}
+
+
