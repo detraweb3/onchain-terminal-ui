@@ -4,8 +4,6 @@ import { Button, Container, Paper, TextField, Typography } from "@mui/material";
 import { DecryptData } from "../../../util";
 import PasswordConfirmationFlow from "../../../components/PasswordConfirmationFlow/PasswordConfirmationFlow";
 
-
-
 const Login = () => {
   const [, setLocalDataEncrypted] = useState(false);
   const [encryptedData, setEncryptedData] = useState(false);
@@ -31,7 +29,5 @@ const Login = () => {
     </div>
   );
 };
-
-
 
 export default Login;

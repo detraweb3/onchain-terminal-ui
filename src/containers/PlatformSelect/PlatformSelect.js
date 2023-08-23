@@ -30,7 +30,7 @@ const platformFeatures = [
     "Create a .onchain domain for your wallet",
     "Select tokens to DCA on a scheduled timeframe",
     "Optionally make a public profile for your wallet(s)",
-    "Send messages to other OnChain Terminal traders",
+    "Send messages to other On-Chain Terminal traders",
   ],
   [
     "Access to all premium features",
@@ -68,7 +68,7 @@ const PlatformSelect = () => {
             isDisabled={true}
             features={platformFeatures[2]}
             description={
-              "Host your own OnChain Terminal instance to store your data"
+              "Host your own On-Chain Terminal instance to store your data"
             }
           />
         </div>

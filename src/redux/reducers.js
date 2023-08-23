@@ -1,4 +1,4 @@
-import { SET_USER_DATA } from './actions';
+import { SET_USER_DATA } from "./actions";
 
 const initialState = {
   selectedOption: {}, // Initial state

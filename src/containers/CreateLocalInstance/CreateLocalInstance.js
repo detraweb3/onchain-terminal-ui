@@ -10,20 +10,20 @@ const CreateLocalInstance = () => {
 
   const generatePrivateKey = () => {
     const _wallet = ethers.Wallet.createRandom();
-    console.log(_wallet.privateKey)
+    console.log(_wallet.privateKey);
     setWallet(_wallet);
   };
 
   const importPrivateKey = (privateKey) => {
     const _wallet = new ethers.Wallet(privateKey);
-    console.log(_wallet)
+    console.log(_wallet);
 
-    console.log('Address:', _wallet.address);
+    console.log("Address:", _wallet.address);
     if (_wallet.address) {
-      setWallet(_wallet)
-      setSelected("create")
+      setWallet(_wallet);
+      setSelected("create");
     }
-  }
+  };
 
   const handleNavigation = (option) => {
     setSelected(option);
@@ -39,17 +39,17 @@ const CreateLocalInstance = () => {
             handleNavigation={handleNavigation}
           />
         </div>
-        {selected == "import" && <Import importPrivateKey={importPrivateKey}/>}
+        {selected == "import" && <Import importPrivateKey={importPrivateKey} />}
         <div>
           {wallet.address && (
             <p>
               New Wallet:{" "}
               {wallet.address.slice(0, 5) +
-              "...." +
-              wallet.address.slice(
-                wallet.address.length - 6,
-                wallet.address.length,
-              )}
+                "...." +
+                wallet.address.slice(
+                  wallet.address.length - 6,
+                  wallet.address.length,
+                )}
             </p>
           )}
           {selected == "create" && (
@@ -62,7 +62,6 @@ const CreateLocalInstance = () => {
             />
           )}
         </div>
-
       </Container>
     </div>
   );

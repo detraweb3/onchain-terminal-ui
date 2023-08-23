@@ -1,10 +1,10 @@
-import React, {useState} from "react";
-import {DecryptData} from "../../util";
-import {Button, Paper, TextField, Typography} from "@mui/material";
+import React, { useState } from "react";
+import { DecryptData } from "../../util";
+import { Button, Paper, TextField, Typography } from "@mui/material";
 import connectRedux from "../../redux/connect";
-import {useNavigate} from "react-router";
+import { useNavigate } from "react-router";
 
-const PasswordConfirmationFlow = ({userData, setUserData, encryptedData}) => {
+const PasswordConfirmationFlow = ({ userData, setUserData, encryptedData }) => {
   const [failed, setFailed] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const PasswordConfirmationFlow = ({userData, setUserData, encryptedData}) => {
     if (decrypted.err) {
       setFailed(true);
     } else {
-      setUserData({...decrypted.data, pwd: passwordInput})
+      setUserData({ ...decrypted.data, pwd: passwordInput });
       navigate(`/platform/home`);
     }
   };
@@ -54,4 +54,4 @@ const PasswordConfirmationFlow = ({userData, setUserData, encryptedData}) => {
   );
 };
 
-export default connectRedux.connectUserDataRedux(PasswordConfirmationFlow)
+export default connectRedux.connectUserDataRedux(PasswordConfirmationFlow);

@@ -1,4 +1,4 @@
-# OnChain Terminal UI
+# On-Chain Terminal UI
 
 ### Open Source Rules
 

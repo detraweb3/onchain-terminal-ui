@@ -1,5 +1,5 @@
-import { connect } from 'react-redux';
-import { setUserData } from './actions';
+import { connect } from "react-redux";
+import { setUserData } from "./actions";
 
 const mapStateToPropsAll = (state) => ({
   userData: state.userData,
@@ -20,5 +20,5 @@ const mapDispatchToPropsAll = {
 const connectUserDataRedux = connect(mapStateToProps, mapDispatchToProps);
 const connectAllRedux = connect(mapStateToPropsAll, mapDispatchToPropsAll);
 
-const connectRedux = {connectUserDataRedux, connectAllRedux};
-export default connectRedux
+const connectRedux = { connectUserDataRedux, connectAllRedux };
+export default connectRedux;

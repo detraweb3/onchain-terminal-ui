@@ -1,41 +1,26 @@
-import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router";
-import {Container} from "@mui/material";
-import {connect} from "react-redux";
-import {setUserData} from "../../redux/actions";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
+import { Container } from "@mui/material";
 import connectRedux from "../../redux/connect";
+import { ListenForNewTokenPairs } from "../../web3/NewTokens";
 
-const mapStateToProps = (state) => ({
-  userData: state.userData,
-});
-
-const mapDispatchToProps = {
-  setUserData,
-};
-
-const Platform = ({userData, setUserData}) => {
+const Platform = ({ userData, setUserData }) => {
   const [, setLocalDataEncrypted] = useState(false);
   const [encryptedData, setEncryptedData] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!userData)
-      navigate(`/`);
-
-    if (!userData.pwd === undefined)
-      navigate(`/`);
-
+    console.log(userData);
+    if (!userData) navigate(`/`);
   }, []);
 
   return (
-    <div className={"homepage"}>
-      <div>
-        <Container maxWidth="sm">
-          <h1>Instance Found on Device</h1>
-        </Container>
-      </div>
+    <div>
+      <Container maxWidth="md">
+        <h3>On-Chain Terminal</h3>
+      </Container>
     </div>
   );
 };
 
-export default connectRedux.connectUserDataRedux(Platform)
+export default connectRedux.connectUserDataRedux(Platform);

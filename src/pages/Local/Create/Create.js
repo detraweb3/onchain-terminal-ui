@@ -62,7 +62,7 @@ const Create = () => {
             handleLogin={handleLogin}
             handleCreate={handleCreate}
           />
-          <h1>On Chain Terminal Local Instance</h1>
+          <h1>On-Chain Terminal Local Instance</h1>
           <CreateLocalInstance />
         </Container>
       </div>
