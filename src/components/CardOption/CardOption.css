@@ -1,48 +1,47 @@
 .custom-container {
-    background-color: white;
-    color: black;
-    border-radius: 7px;
+  background-color: white;
+  color: black;
+  border-radius: 7px;
 }
 
 .content-container {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-bottom: 25px;
-
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 25px;
 }
 
 .custom-title {
-    padding-top: 15px;
+  padding-top: 15px;
 }
 
 .custom-button {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 /* Styles for the feature container */
 .feature-container {
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Styles for the feature title */
 .feature-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    padding-top: 20px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  padding-top: 20px;
 }
 
 /* Styles for the feature list */
 .feature-list {
-    list-style-type: disc;
-    padding-left: 20px;
+  list-style-type: disc;
+  padding-left: 20px;
 }
 
 /* Styles for individual features */
 .feature-list li {
-    font-size: 16px;
-    margin-bottom: 5px;
+  font-size: 16px;
+  margin-bottom: 5px;
 }

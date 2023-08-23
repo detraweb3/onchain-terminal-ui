@@ -1,16 +1,22 @@
-import './App.css';
+import "./App.css";
 import Home from "./pages/Home/Home";
-import React from 'react';
-import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Local from "./pages/Local/Create/Create";
+import Login from "./pages/Local/Login/Login";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home/>,
+    element: <Home />,
+  },
+  {
+    path: "/local/create",
+    element: <Local />,
+  },
+  {
+    path: "/local/login",
+    element: <Login />,
   },
 ]);
 

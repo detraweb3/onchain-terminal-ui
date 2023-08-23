@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {Grid} from '@mui/material';
+import React, { useState } from "react";
 import CardOption from "../../components/CardOption/CardOption";
-import "./PlatformSelect.css"
+import "./PlatformSelect.css";
+import { useNavigate } from "react-router";
 
 const platformFeatures = [
   [
@@ -30,33 +30,47 @@ const platformFeatures = [
     "Create a .onchain domain for your wallet",
     "Select tokens to DCA on a scheduled timeframe",
     "Optionally make a public profile for your wallet(s)",
-    "Send messages to other OnChain Terminal traders"
+    "Send messages to other OnChain Terminal traders",
   ],
   [
     "Access to all premium features",
     "Requires knowledge of server setup",
-    "All data is stored on your own server"
-  ]
-]
+    "All data is stored on your own server",
+  ],
+];
 
 const PlatformSelect = () => {
-
-  const [selected, setSelect] = useState("local")
-
   return (
     <div>
       <div className={"card-container container card-option"}>
         <div className={"card-option card"}>
-          <CardOption title={"Local"} features={platformFeatures[0]} setSelect={setSelect}
-                      description={"Limited features without your keys leaving your computer"}/>
+          <CardOption
+            title={"Local"}
+            features={platformFeatures[0]}
+            description={
+              "Limited features without your keys leaving your computer"
+            }
+          />
         </div>
         <div className={"card-option card"}>
-          <CardOption title={"Premium"} isDisabled={true} features={platformFeatures[1]} setSelect={setSelect}
-                      description={"Fully featured platform suitable for most traders and algo traders"}/>
+          <CardOption
+            title={"Premium"}
+            isDisabled={true}
+            features={platformFeatures[1]}
+            description={
+              "Fully featured platform suitable for most traders and algo traders"
+            }
+          />
         </div>
         <div className={"card-option card"}>
-          <CardOption title={"Self Hosted"} isDisabled={true} features={platformFeatures[2]} setSelect={setSelect}
-                      description={"Host your own OnChain Terminal instance to store your data"}/>
+          <CardOption
+            title={"Self Hosted"}
+            isDisabled={true}
+            features={platformFeatures[2]}
+            description={
+              "Host your own OnChain Terminal instance to store your data"
+            }
+          />
         </div>
       </div>
     </div>
