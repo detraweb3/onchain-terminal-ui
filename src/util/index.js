@@ -5,6 +5,7 @@ const EncryptData = (data, encryptionKey) => {
 };
 
 const DecryptData = (ciphertext, encryptionKey) => {
+  console.log(ciphertext, encryptionKey)
   const bytes = CryptoJS.AES.decrypt(ciphertext, encryptionKey);
   let data;
   try {

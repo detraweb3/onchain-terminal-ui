@@ -25,7 +25,6 @@ const CreateLocalInstance = () => {
     }
   }
 
-
   const handleNavigation = (option) => {
     setSelected(option);
     if (option == "create") generatePrivateKey();
