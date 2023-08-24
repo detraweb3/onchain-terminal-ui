@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import connectRedux from "../../redux/connect";
 import Chat from "../../components/Chat/Chat";
 import "./Platform.css";
+import ChartWidget from "../../containers/ChartWidget/ChartWidget";
 
 const Platform = ({ userData, setUserData }) => {
   const navigate = useNavigate();
@@ -18,10 +19,12 @@ const Platform = ({ userData, setUserData }) => {
   }, []);
 
   return (
-    <div style={{ width: "70%", marginLeft: "auto", marginRight: "auto" }}>
+    <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
       <h3>On-Chain Terminal (Eventually draggable and responsive)</h3>
       <div className="grid" style={{ paddingBottom: "40px" }}>
-        <Card size="3x1" content="Chart and buying/selling and token search" />
+        <div className={`card-dnd card-3x1`}>
+          <ChartWidget />
+        </div>
         <Card size="1x2" content="New Tokens and Liquidity locked" />
         <Card size="1x1" content="Token buy/sell simulator (honeypot checks)" />
         <Card size="1x1" content="Live News" />
