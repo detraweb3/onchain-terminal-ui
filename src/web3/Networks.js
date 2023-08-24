@@ -11,6 +11,7 @@ const NETWORKS = [
         address: "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f",
       },
     ],
+    unicrypt: "0x663A5C229c09b049E36dCc11a9B0d4a8Eb9db214",
   },
 ];
 

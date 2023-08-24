@@ -68,7 +68,7 @@ const PlatformSelect = () => {
             isDisabled={true}
             features={platformFeatures[2]}
             description={
-              "Host your own On-Chain Terminal instance to store your data"
+              "Host your own On-Chain Terminal Premium instance to store your own data"
             }
           />
         </div>

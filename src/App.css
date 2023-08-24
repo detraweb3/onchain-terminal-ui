@@ -28,3 +28,12 @@ h4 {
 .App-link {
   color: #61dafb;
 }
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 0px solid #d9d9d9;
+  width: 100%;
+}

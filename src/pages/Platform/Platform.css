@@ -1,0 +1,28 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-dnd {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 0px solid #d9d9d9;
+  height: 200px !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.card-1x1 {
+  grid-column: span 1;
+}
+
+.card-1x2 {
+  grid-column: span 2;
+}
+
+.card-3x1 {
+  grid-column: span 3;
+}
