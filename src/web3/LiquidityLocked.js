@@ -75,7 +75,7 @@ const UnicryptListener = async () => {
           let tokenPrice = await getTokenPrice(lpToken, token0, token1, provider);
           if (!tokenPrice) return;
           console.log(
-            `New Liquidity Lock created:\nToken0: ${token0}\nToken1: ${token1}\nPair Address: ${lpToken}\nNetwork: ${network.name}\n`,
+            `New Liquidity Lock:\nToken0: ${token0}\nToken1: ${token1}\nPair Address: ${lpToken}\nNetwork: ${network.name}\n`,
           );
           console.log(`User: ${user} | LP Amount: ${amount} | Lock Date: ${lockDate} | Unlock Date: ${unlockDate}`)
           console.log(

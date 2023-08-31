@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router";
 import connectRedux from "../../redux/connect";
 import Chat from "../../components/Chat/Chat";
 import "./Platform.css";
@@ -83,7 +83,7 @@ const exampleTokens = [{
   }
 }]
 
-const Platform = ({ userData, setUserData }) => {
+const Platform = ({userData, setUserData}) => {
   const navigate = useNavigate();
   const [showMessageWindow, setShowMessageWindow] = useState(false);
 
@@ -97,26 +97,27 @@ const Platform = ({ userData, setUserData }) => {
   }, []);
 
   return (
-    <div style={{ width: "80%", marginLeft: "auto", marginRight: "auto" }}>
+    <div style={{width: "80%", marginLeft: "auto", marginRight: "auto"}}>
       <h3>On-Chain Terminal MVP</h3>
-      <div className="grid" style={{ paddingBottom: "40px" }}>
+      <div className="grid" style={{paddingBottom: "40px"}}>
         <div className={`card-dnd card-3x1`}>
-          <ChartWidget />
+          <ChartWidget/>
         </div>
         <div className={`card-dnd card-1x2`}>
           <TokenAlertCard title={"New Tokens"} tokens={exampleTokens}/>
-          <TokenAlertCard title={"New Liquidity Locked"} tokens={exampleTokens} />
+          <TokenAlertCard title={"New Liquidity Locked"} tokens={exampleTokens}/>
         </div>
-        <Card size="1x1" content="Token buy/sell simulator (honeypot checks)" />
-        <Card size="1x1" content="Live News" />
-        <Card size="1x1" content="Trending Tokens" />
-        <Card size="1x1" content="Portfolio" />
-        <Card size="1x1" content="Trader Feed" />
-        <Card size="1x1" content="Perp Positions" />
-        <Card size="1x1" content="Options Positions" />
-        <Card size="1x1" content="API Keys" />
-        <Card size="1x2" content="Trading Bots" />
-        <Card size="3x1" content="Token Screener" />
+        <PremiumCard size={"1x1"} title={"Live News"} />
+        <PremiumCard size={"1x1"} title={"Token buy/sell simulator"} />
+        <PremiumCard size={"1x1"} title={"Trending Tokens"} />
+        <PremiumCard size={"1x1"} title={"Trader Feed"} />
+
+        <Card size="1x1" content="Portfolio"/>
+        <Card size="1x1" content="Perp Positions"/>
+        <Card size="1x1" content="Options Positions"/>
+        <PremiumCard size={"1x1"} title={"API Keys"} />
+        <PremiumCard size={"1x2"} title={"Trading Bots"} />
+        <PremiumCard size={"3x1"} title={"Token Screener"} />
       </div>
       <div
         className={`message-button ${showMessageWindow ? "active" : ""}`}
@@ -124,12 +125,26 @@ const Platform = ({ userData, setUserData }) => {
       >
         <p>Chat</p>
       </div>
-      {showMessageWindow && <Chat toggleMessageWindow={toggleMessageWindow} />}
+      {showMessageWindow && <Chat toggleMessageWindow={toggleMessageWindow}/>}
     </div>
   );
 };
 
-const Card = ({ size, content }) => {
+const PremiumCard = ({title, size}) => {
+  return (
+  <div className={`card-dnd card-${size}`} style={{backgroundColor: "#131722", border: "0.25px solid gray"}}>
+    <div>
+      <p>{title}</p>
+      <h3>
+        Upgrade to Premium for access
+      </h3>
+    </div>
+
+  </div>
+  )
+}
+
+const Card = ({size, content}) => {
   return (
     <div className={`card-dnd card-${size}`}>
       <p>{content}</p>
