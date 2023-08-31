@@ -6,6 +6,82 @@ const uniswapV2PairABI = [
   "function getReserves() external view returns (uint112 reserve0, uint112 reserve1, uint32 blockTimestampLast)",
 ];
 
+let tokenPairs = {};
+
+const getQuotePrice = async (token1, network, provider, factoryContract) => {
+  try {
+    let pairAddress = tokenPairs[token1];
+    if (!pairAddress) {
+      pairAddress = await factoryContract.getPair(token1, network.usdc);
+      tokenPairs[token1] = pairAddress;
+    }
+
+    const pairContract = new ethers.Contract(
+      pairAddress,
+      uniswapV2PairABI,
+      provider,
+    );
+
+    const [reserve0, reserve1] = await pairContract.getReserves();
+    const token1Contract = new ethers.Contract(
+      token1,
+      [
+        "function name() view returns (string)",
+        "function decimals() view returns (uint8)",
+      ],
+      provider,
+    );
+    let decimals = await token1Contract.decimals();
+
+    return (
+      Number(ethers.parseUnits(reserve0.toString(), decimals)) /
+      Number(ethers.parseUnits(reserve1.toString(), 6))
+    );
+  } catch (error) {
+    console.error("Error fetching WETH/USDC price:", error);
+    return 0;
+  }
+};
+
+const getTokenPrice = async (pairAddress, token0, token1, provider) => {
+  try {
+    const pairContract = new ethers.Contract(
+      pairAddress,
+      uniswapV2PairABI,
+      provider,
+    );
+
+    const [reserve0, reserve1] = await pairContract.getReserves();
+    const token0Contract = new ethers.Contract(
+      token0,
+      [
+        "function name() view returns (string)",
+        "function decimals() view returns (uint8)",
+      ],
+      provider,
+    );
+    let token0decimals = await token0Contract.decimals();
+
+    const token2Contract = new ethers.Contract(
+      token1,
+      [
+        "function name() view returns (string)",
+        "function decimals() view returns (uint8)",
+      ],
+      provider,
+    );
+    let token2decimals = await token2Contract.decimals();
+
+    return (
+      Number(ethers.formatUnits(reserve1.toString(), token2decimals)) /
+      Number(ethers.formatUnits(reserve0.toString(), token0decimals))
+    );
+  } catch (error) {
+    console.error("Error fetching WETH/USDC price:", error);
+    return 0;
+  }
+};
+
 let running = false;
 
 async function ListenForNewTokenPairs() {
@@ -35,81 +111,6 @@ async function ListenForNewTokenPairs() {
       wsprovider,
     );
 
-    let tokenPairs = {};
-
-    const getQuotePrice = async (token1, network) => {
-      try {
-        let pairAddress = tokenPairs[token1];
-        if (!pairAddress) {
-          pairAddress = await factoryContract.getPair(token1, network.usdc);
-          tokenPairs[token1] = pairAddress;
-        }
-
-        const pairContract = new ethers.Contract(
-          pairAddress,
-          uniswapV2PairABI,
-          provider,
-        );
-
-        const [reserve0, reserve1] = await pairContract.getReserves();
-        const token1Contract = new ethers.Contract(
-          token1,
-          [
-            "function name() view returns (string)",
-            "function decimals() view returns (uint8)",
-          ],
-          provider,
-        );
-        let decimals = await token1Contract.decimals();
-
-        return (
-          Number(ethers.parseUnits(reserve0.toString(), decimals)) /
-          Number(ethers.parseUnits(reserve1.toString(), 6))
-        );
-      } catch (error) {
-        console.error("Error fetching WETH/USDC price:", error);
-        return 0;
-      }
-    };
-
-    const getTokenPrice = async (pairAddress, token0, token1) => {
-      try {
-        const pairContract = new ethers.Contract(
-          pairAddress,
-          uniswapV2PairABI,
-          provider,
-        );
-
-        const [reserve0, reserve1] = await pairContract.getReserves();
-        const token0Contract = new ethers.Contract(
-          token0,
-          [
-            "function name() view returns (string)",
-            "function decimals() view returns (uint8)",
-          ],
-          provider,
-        );
-        let token0decimals = await token0Contract.decimals();
-
-        const token2Contract = new ethers.Contract(
-          token1,
-          [
-            "function name() view returns (string)",
-            "function decimals() view returns (uint8)",
-          ],
-          provider,
-        );
-        let token2decimals = await token2Contract.decimals();
-
-        return (
-          Number(ethers.formatUnits(reserve1.toString(), token2decimals)) /
-          Number(ethers.formatUnits(reserve0.toString(), token0decimals))
-        );
-      } catch (error) {
-        console.error("Error fetching WETH/USDC price:", error);
-        return 0;
-      }
-    };
 
     wsfactoryContract.on(
       "PairCreated",
@@ -138,8 +139,8 @@ async function ListenForNewTokenPairs() {
           if (pairAddress == "0x0000000000000000000000000000000000000000")
             return;
 
-          let quotePrice = await getQuotePrice(token1, network);
-          let tokenPrice = await getTokenPrice(pairAddress, token0, token1);
+          let quotePrice = await getQuotePrice(token1, network, provider, factoryContract);
+          let tokenPrice = await getTokenPrice(pairAddress, token0, token1, provider);
           if (!tokenPrice) return;
           console.log(
             `New pair created:\nToken0: ${token0}\nToken1: ${token1}\nPair Address: ${pairAddress}\nNetwork: ${network.name}\nFactory: ${factory.name}`,
@@ -168,4 +169,4 @@ async function ListenForNewTokenPairs() {
   }
 }
 
-export { ListenForNewTokenPairs };
+export { ListenForNewTokenPairs, getTokenPrice, getQuotePrice };

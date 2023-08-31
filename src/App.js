@@ -8,6 +8,7 @@ import Local from "./pages/Local/Create/Create";
 import Login from "./pages/Local/Login/Login";
 import Platform from "./pages/Platform/Platform";
 import { ListenForNewTokenPairs } from "./web3/NewTokens";
+import UnicryptListener from "./web3/LiquidityLocked";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
 function App() {
   useEffect(() => {
     ListenForNewTokenPairs();
+    UnicryptListener()
   }, []);
 
   return (
