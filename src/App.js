@@ -32,7 +32,7 @@ const router = createBrowserRouter([
 function App() {
   useEffect(() => {
     ListenForNewTokenPairs();
-    UnicryptListener()
+    UnicryptListener();
   }, []);
 
   return (

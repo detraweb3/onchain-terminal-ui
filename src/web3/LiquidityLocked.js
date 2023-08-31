@@ -1,8 +1,7 @@
 import NETWORKS from "./Networks";
-import {getQuotePrice, getTokenPrice} from "./NewTokens";
+import { getQuotePrice, getTokenPrice } from "./NewTokens";
 
 const ethers = require("ethers");
-
 
 const UnicryptListener = async () => {
   const unicryptABI = [
@@ -13,7 +12,7 @@ const UnicryptListener = async () => {
     "function factory() view returns (address)",
     "function token0() view returns (address)",
     "function token1() view returns (address)",
-  ]
+  ];
 
   const listenForNewLocks = async (network, unicryptAddress) => {
     const wsprovider = new ethers.WebSocketProvider(network.wsURL);
@@ -25,7 +24,6 @@ const UnicryptListener = async () => {
 
     const provider = new ethers.JsonRpcProvider(network.rpcURL);
 
-
     wsLockerContract.on(
       "onDeposit",
       async (lpToken, user, amount, lockDate, unlockDate) => {
@@ -35,9 +33,9 @@ const UnicryptListener = async () => {
           provider,
         );
 
-        let factoryAddress = await lpTokenContract.factory()
-        let token0 = await lpTokenContract.token0()
-        let token1 = await lpTokenContract.token1()
+        let factoryAddress = await lpTokenContract.factory();
+        let token0 = await lpTokenContract.token0();
+        let token1 = await lpTokenContract.token1();
 
         const factoryContract = new ethers.Contract(
           factoryAddress,
@@ -71,13 +69,25 @@ const UnicryptListener = async () => {
           if (lpTokenContract == "0x0000000000000000000000000000000000000000")
             return;
 
-          let quotePrice = await getQuotePrice(token1, network, provider, factoryContract);
-          let tokenPrice = await getTokenPrice(lpToken, token0, token1, provider);
+          let quotePrice = await getQuotePrice(
+            token1,
+            network,
+            provider,
+            factoryContract,
+          );
+          let tokenPrice = await getTokenPrice(
+            lpToken,
+            token0,
+            token1,
+            provider,
+          );
           if (!tokenPrice) return;
           console.log(
             `New Liquidity Lock:\nToken0: ${token0}\nToken1: ${token1}\nPair Address: ${lpToken}\nNetwork: ${network.name}\n`,
           );
-          console.log(`User: ${user} | LP Amount: ${amount} | Lock Date: ${lockDate} | Unlock Date: ${unlockDate}`)
+          console.log(
+            `User: ${user} | LP Amount: ${amount} | Lock Date: ${lockDate} | Unlock Date: ${unlockDate}`,
+          );
           console.log(
             `Token0 Name: ${token0Name}, Decimals: ${token0Decimals}`,
           );
@@ -94,13 +104,11 @@ const UnicryptListener = async () => {
         }
       },
     );
-  }
-
-
+  };
 
   for (const network of NETWORKS) {
-      listenForNewLocks(network, network.unicrypt);
+    listenForNewLocks(network, network.unicrypt);
   }
-}
+};
 
-export default UnicryptListener
+export default UnicryptListener;

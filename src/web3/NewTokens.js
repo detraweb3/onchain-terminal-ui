@@ -111,7 +111,6 @@ async function ListenForNewTokenPairs() {
       wsprovider,
     );
 
-
     wsfactoryContract.on(
       "PairCreated",
       async (token0, token1, pairAddress, event) => {
@@ -139,8 +138,18 @@ async function ListenForNewTokenPairs() {
           if (pairAddress == "0x0000000000000000000000000000000000000000")
             return;
 
-          let quotePrice = await getQuotePrice(token1, network, provider, factoryContract);
-          let tokenPrice = await getTokenPrice(pairAddress, token0, token1, provider);
+          let quotePrice = await getQuotePrice(
+            token1,
+            network,
+            provider,
+            factoryContract,
+          );
+          let tokenPrice = await getTokenPrice(
+            pairAddress,
+            token0,
+            token1,
+            provider,
+          );
           if (!tokenPrice) return;
           console.log(
             `New pair created:\nToken0: ${token0}\nToken1: ${token1}\nPair Address: ${pairAddress}\nNetwork: ${network.name}\nFactory: ${factory.name}`,
